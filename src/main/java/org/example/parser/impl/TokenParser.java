@@ -4,6 +4,7 @@ import static java.lang.Boolean.FALSE;
 import static org.example.lexer.model.TokenType.ADDITION;
 import static org.example.lexer.model.TokenType.DECIMAL_NUMBER;
 import static org.example.lexer.model.TokenType.DIVISION;
+import static org.example.lexer.model.TokenType.END_OF_A_SEQUENCE;
 import static org.example.lexer.model.TokenType.INTEGER_NUMBER;
 import static org.example.lexer.model.TokenType.LEFT_PARENTHESIS;
 import static org.example.lexer.model.TokenType.MULTIPLICATION;
@@ -40,12 +41,16 @@ public class TokenParser implements Parser {
 
     Expression firstOperand = term();
 
-    if (match(ADDITION)) {
-      listCurrentPosition++;
-      return new AdditionExpression(firstOperand, term());
-    } else if (match(SUBTRACTION)) {
-      listCurrentPosition++;
-      return new SubtractionExpression(firstOperand, term());
+    while (FALSE.equals(getCurrentToken().type().equals(END_OF_A_SEQUENCE))) {
+      if (match(ADDITION)) {
+        listCurrentPosition++;
+        firstOperand = new AdditionExpression(firstOperand, term());
+      } else if (match(SUBTRACTION)) {
+        listCurrentPosition++;
+        firstOperand = new SubtractionExpression(firstOperand, term());
+      } else {
+        return firstOperand;
+      }
     }
 
     return firstOperand;
@@ -55,12 +60,16 @@ public class TokenParser implements Parser {
 
     Expression firstOperand = factor();
 
-    if (match(MULTIPLICATION)) {
-      listCurrentPosition++;
-      return new MultiplicationExpression(firstOperand, factor());
-    } else if (match(DIVISION)) {
-      listCurrentPosition++;
-      return new DivisionExpression(firstOperand, factor());
+    while (FALSE.equals(getCurrentToken().type().equals(END_OF_A_SEQUENCE))) {
+      if (match(MULTIPLICATION)) {
+        listCurrentPosition++;
+        firstOperand = new MultiplicationExpression(firstOperand, factor());
+      } else if (match(DIVISION)) {
+        listCurrentPosition++;
+        firstOperand = new DivisionExpression(firstOperand, factor());
+      } else {
+        return firstOperand;
+      }
     }
 
     return firstOperand;

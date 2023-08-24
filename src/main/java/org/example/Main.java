@@ -11,7 +11,7 @@ public class Main {
     ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     Calculator calculator = context.getBean(Calculator.class);
 
-    String sequence = "2 + 2 * 2";
+    String sequence = "0.75-0.7";
 
     System.out.println(calculator.calculate(sequence));
 
