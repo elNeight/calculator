@@ -1,7 +1,9 @@
 package org.example.parser.ast;
 
+import java.math.BigDecimal;
+
 public interface Expression {
 
-  Number evaluate();
+  BigDecimal evaluate();
 
 }

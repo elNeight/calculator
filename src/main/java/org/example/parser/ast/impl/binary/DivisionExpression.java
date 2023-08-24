@@ -1,5 +1,6 @@
 package org.example.parser.ast.impl.binary;
 
+import java.math.BigDecimal;
 import org.example.parser.ast.Expression;
 
 public class DivisionExpression implements Expression {
@@ -13,8 +14,8 @@ public class DivisionExpression implements Expression {
   }
 
   @Override
-  public Number evaluate() {
-    return firstOperand.evaluate().doubleValue() / secondOperand.evaluate().doubleValue();
+  public BigDecimal evaluate() {
+    return firstOperand.evaluate().divide(secondOperand.evaluate());
   }
 
 }

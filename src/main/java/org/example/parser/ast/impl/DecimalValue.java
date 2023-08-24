@@ -1,5 +1,6 @@
 package org.example.parser.ast.impl;
 
+import java.math.BigDecimal;
 import org.example.lexer.model.Token;
 import org.example.parser.ast.Expression;
 
@@ -12,8 +13,8 @@ public class DecimalValue implements Expression {
   }
 
   @Override
-  public Double evaluate() {
-    return Double.parseDouble(value);
+  public BigDecimal evaluate() {
+    return BigDecimal.valueOf(Double.parseDouble(value));
   }
 
 }
