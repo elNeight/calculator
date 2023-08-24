@@ -28,7 +28,8 @@ public enum TokenType {
   /**
    * Spaces
    */
-  SPACE("\\s+");
+  SPACE("\\s+"),
+  END_OF_A_SEQUENCE("$");
 
   private final String regexp;
 

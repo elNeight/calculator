@@ -34,6 +34,8 @@ public class SequenceTokenizer implements Lexer {
       tokenList.add(extractToken());
     }
 
+    tokenList.add(extractToken());
+
     return skipSpaces(tokenList);
   }
 
