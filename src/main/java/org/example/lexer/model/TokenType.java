@@ -29,7 +29,12 @@ public enum TokenType {
    * Spaces
    */
   SPACE("\\s+"),
-  END_OF_A_SEQUENCE("$");
+  END_OF_A_SEQUENCE("$"),
+
+  /**
+   * Functions
+   */
+  SQRT("sqrt");
 
   private final String regexp;
 

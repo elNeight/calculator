@@ -11,7 +11,7 @@ public class Main {
     ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     Calculator calculator = context.getBean(Calculator.class);
 
-    String sequence = "1+2-3-(-4)*5/6+7";
+    String sequence = "1 - (-sqrt(14256))";
 
     System.out.println(calculator.calculate(sequence));
 

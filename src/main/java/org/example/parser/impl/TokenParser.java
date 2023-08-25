@@ -9,6 +9,7 @@ import static org.example.lexer.model.TokenType.INTEGER_NUMBER;
 import static org.example.lexer.model.TokenType.LEFT_PARENTHESIS;
 import static org.example.lexer.model.TokenType.MULTIPLICATION;
 import static org.example.lexer.model.TokenType.RIGHT_PARENTHESIS;
+import static org.example.lexer.model.TokenType.SQRT;
 import static org.example.lexer.model.TokenType.SUBTRACTION;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import org.example.parser.ast.impl.binary.AdditionExpression;
 import org.example.parser.ast.impl.binary.DivisionExpression;
 import org.example.parser.ast.impl.binary.MultiplicationExpression;
 import org.example.parser.ast.impl.binary.SubtractionExpression;
+import org.example.parser.ast.impl.unary.SquareRootExpression;
 import org.example.parser.exception.UnexpectedTokenException;
 import org.springframework.stereotype.Service;
 
@@ -105,17 +107,24 @@ public class TokenParser implements Parser {
       DecimalValue decimalValue = new DecimalValue(getCurrentToken());
       listCurrentPosition++;
       return decimalValue;
+    } else if (match(SQRT)) {
+      listCurrentPosition++;
+      return new SquareRootExpression(expressionInParentheses());
     } else {
-
-      matchOrElseThrow(LEFT_PARENTHESIS);
-      listCurrentPosition++;
-      Expression expression = expression();
-      matchOrElseThrow(RIGHT_PARENTHESIS);
-      listCurrentPosition++;
-
-      return expression;
+      return expressionInParentheses();
     }
 
+  }
+
+  private Expression expressionInParentheses() {
+
+    matchOrElseThrow(LEFT_PARENTHESIS);
+    listCurrentPosition++;
+    Expression expression = expression();
+    matchOrElseThrow(RIGHT_PARENTHESIS);
+    listCurrentPosition++;
+
+    return expression;
   }
 
   ////////

@@ -1,13 +1,12 @@
 package org.example.parser.ast.impl.binary;
 
+import static org.example.parser.constants.ExpressionConstants.SCALE;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import org.example.parser.ast.Expression;
-import org.springframework.beans.factory.annotation.Value;
 
 public class DivisionExpression implements Expression {
-
-  private static final Integer scale = 16;
 
   private final Expression firstOperand;
   private final Expression secondOperand;
@@ -19,7 +18,7 @@ public class DivisionExpression implements Expression {
 
   @Override
   public BigDecimal evaluate() {
-    return firstOperand.evaluate().divide(secondOperand.evaluate(), scale, RoundingMode.HALF_UP);
+    return firstOperand.evaluate().divide(secondOperand.evaluate(), SCALE, RoundingMode.HALF_UP);
   }
 
 }
