@@ -40,15 +40,15 @@ public class TokenParser implements Parser {
 
   private Expression expression() {
 
-    Expression firstOperand = term();
+    Expression firstOperand = termNegationCheck();
 
     while (FALSE.equals(getCurrentToken().type().equals(END_OF_A_SEQUENCE))) {
       if (match(ADDITION)) {
         listCurrentPosition++;
-        firstOperand = new AdditionExpression(firstOperand, term());
+        firstOperand = new AdditionExpression(firstOperand, termWithoutNegationCheck());
       } else if (match(SUBTRACTION)) {
         listCurrentPosition++;
-        firstOperand = new SubtractionExpression(firstOperand, term());
+        firstOperand = new SubtractionExpression(firstOperand, termWithoutNegationCheck());
       } else {
         return firstOperand;
       }
@@ -57,9 +57,17 @@ public class TokenParser implements Parser {
     return firstOperand;
   }
 
-  private Expression term() {
-
+  private Expression termNegationCheck() {
     Expression firstOperand = unaryNegation();
+    return term(firstOperand);
+  }
+
+  private Expression termWithoutNegationCheck() {
+    Expression firstOperand = factor();
+    return term(firstOperand);
+  }
+
+  private Expression term(Expression firstOperand) {
 
     while (FALSE.equals(getCurrentToken().type().equals(END_OF_A_SEQUENCE))) {
       if (match(MULTIPLICATION)) {

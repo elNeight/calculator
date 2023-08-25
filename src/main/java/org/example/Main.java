@@ -11,7 +11,7 @@ public class Main {
     ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     Calculator calculator = context.getBean(Calculator.class);
 
-    String sequence = "1+2-3*(-4+5)-6/7";
+    String sequence = "1-5+3-2-(-1-2-(-1))-1";
 
     System.out.println(calculator.calculate(sequence));
 
