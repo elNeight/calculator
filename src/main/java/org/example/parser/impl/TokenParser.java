@@ -18,6 +18,7 @@ import org.example.parser.Parser;
 import org.example.parser.ast.Expression;
 import org.example.parser.ast.impl.DecimalValue;
 import org.example.parser.ast.impl.IntegerValue;
+import org.example.parser.ast.impl.UnaryNegationExpression;
 import org.example.parser.ast.impl.binary.AdditionExpression;
 import org.example.parser.ast.impl.binary.DivisionExpression;
 import org.example.parser.ast.impl.binary.MultiplicationExpression;
@@ -58,7 +59,7 @@ public class TokenParser implements Parser {
 
   private Expression term() {
 
-    Expression firstOperand = factor();
+    Expression firstOperand = unaryNegation();
 
     while (FALSE.equals(getCurrentToken().type().equals(END_OF_A_SEQUENCE))) {
       if (match(MULTIPLICATION)) {
@@ -73,6 +74,17 @@ public class TokenParser implements Parser {
     }
 
     return firstOperand;
+  }
+
+  private Expression unaryNegation() {
+
+    if (match(SUBTRACTION)) {
+      listCurrentPosition++;
+      Expression operand = factor();
+      return new UnaryNegationExpression(operand);
+    }
+
+    return factor();
   }
 
   private Expression factor() {
