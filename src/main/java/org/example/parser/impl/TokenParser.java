@@ -100,11 +100,11 @@ public class TokenParser implements Parser {
   private Expression factor() {
 
     if (match(INTEGER_NUMBER)) {
-      IntegerValue integerValue = new IntegerValue(getCurrentToken());
+      IntegerValue integerValue = new IntegerValue(getCurrentToken().sequence());
       listCurrentPosition++;
       return integerValue;
     } else if (match(DECIMAL_NUMBER)) {
-      DecimalValue decimalValue = new DecimalValue(getCurrentToken());
+      DecimalValue decimalValue = new DecimalValue(getCurrentToken().sequence());
       listCurrentPosition++;
       return decimalValue;
     } else if (match(SQRT)) {

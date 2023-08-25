@@ -4,15 +4,13 @@ import static org.example.parser.constants.ExpressionConstants.PRECISION;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import lombok.RequiredArgsConstructor;
 import org.example.parser.ast.Expression;
 
+@RequiredArgsConstructor
 public class SquareRootExpression implements Expression {
 
   private final Expression operand;
-
-  public SquareRootExpression(Expression operand) {
-    this.operand = operand;
-  }
 
   @Override
   public BigDecimal evaluate() {
