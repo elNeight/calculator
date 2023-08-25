@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class DivisionExpression implements Expression {
 
-  private static final Integer scale = 10;
+  private static final Integer scale = 16;
 
   private final Expression firstOperand;
   private final Expression secondOperand;
