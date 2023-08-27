@@ -11,7 +11,7 @@ public class Main {
     ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     Calculator calculator = context.getBean(Calculator.class);
 
-    String sequence = "-2 + 2 * (-(-2)) + ln(sqrt(sqrt(sqrt(256))) * 2)";
+    String sequence = "sin(-2 + 2 * (-(-2)) + ln(sqrt(sqrt(sqrt(256)))) * 2)";
 
     System.out.println(calculator.calculate(sequence));
 

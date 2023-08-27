@@ -35,7 +35,8 @@ public enum TokenType {
    * Functions
    */
   SQRT("sqrt"),
-  LN("ln");
+  LN("ln"),
+  SIN("sin");
 
   private final String regexp;
 

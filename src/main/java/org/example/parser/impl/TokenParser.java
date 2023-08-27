@@ -10,6 +10,7 @@ import static org.example.lexer.model.TokenType.LEFT_PARENTHESIS;
 import static org.example.lexer.model.TokenType.LN;
 import static org.example.lexer.model.TokenType.MULTIPLICATION;
 import static org.example.lexer.model.TokenType.RIGHT_PARENTHESIS;
+import static org.example.lexer.model.TokenType.SIN;
 import static org.example.lexer.model.TokenType.SQRT;
 import static org.example.lexer.model.TokenType.SUBTRACTION;
 
@@ -26,6 +27,7 @@ import org.example.parser.ast.impl.binary.DivisionExpression;
 import org.example.parser.ast.impl.binary.MultiplicationExpression;
 import org.example.parser.ast.impl.binary.SubtractionExpression;
 import org.example.parser.ast.impl.unary.NaturalLogarithm;
+import org.example.parser.ast.impl.unary.SineExpression;
 import org.example.parser.ast.impl.unary.SquareRootExpression;
 import org.example.parser.exception.UnexpectedTokenException;
 import org.springframework.stereotype.Service;
@@ -115,6 +117,9 @@ public class TokenParser implements Parser {
     } else if (match(LN)) {
       listCurrentPosition++;
       return new NaturalLogarithm(expressionInParentheses());
+    } else if (match(SIN)) {
+      listCurrentPosition++;
+      return new SineExpression(expressionInParentheses());
     } else {
       return expressionInParentheses();
     }
